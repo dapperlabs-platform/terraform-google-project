@@ -339,7 +339,6 @@ resource "google_logging_project_exclusion" "logging-exclusion" {
 }
 
 resource "google_essential_contacts_contact" "contact" {
-  provider                            = google-beta
   for_each                            = var.contacts
   parent                              = "projects/${local.project.project_id}"
   email                               = each.key
