@@ -15,6 +15,7 @@
  */
 
 locals {
+  expression      = var.expression
   group_iam_roles = distinct(flatten(values(var.group_iam)))
   group_iam = {
     for r in local.group_iam_roles : r => [
@@ -150,6 +151,11 @@ resource "google_project_iam_member" "additive" {
   project = local.project.project_id
   role    = each.value.role
   member  = each.value.member
+  condition {
+    title       = "expires_after_${local.expression}"
+    description = "Expiring at midnight of ${local.expression}"
+    expression  = local.expression
+  }
   depends_on = [
     google_project_service.project_services,
     google_project_iam_custom_role.roles
