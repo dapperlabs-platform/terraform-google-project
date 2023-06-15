@@ -34,7 +34,7 @@ variable "custom_roles" {
 
 variable "expression" {
   description = "Sets time limit on access. e.g. request.time < timestamp(\"2020-01-01T00:00:00Z\")."
-  type        = map(list(string))
+  type        = string
   default     = {}
 }
 
@@ -58,7 +58,7 @@ variable "iam_additive" {
 
 variable "iam_additive_members" {
   description = "IAM additive bindings in {MEMBERS => [ROLE]} format. This might break if members are dynamic values."
-  type        = (string)
+  type        = map(list(string))
   default     = {}
 }
 
