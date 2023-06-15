@@ -32,6 +32,12 @@ variable "custom_roles" {
   default     = {}
 }
 
+variable "expression" {
+  description = "Sets time limit on access. e.g. request.time < timestamp(\"2020-01-01T00:00:00Z\")."
+  type        = map(list(string))
+  default     = {}
+}
+
 variable "group_iam" {
   description = "Authoritative IAM binding for organization groups, in {GROUP_EMAIL => [ROLES]} format. Group emails need to be static. Can be used in combination with the `iam` variable."
   type        = map(list(string))
@@ -52,7 +58,7 @@ variable "iam_additive" {
 
 variable "iam_additive_members" {
   description = "IAM additive bindings in {MEMBERS => [ROLE]} format. This might break if members are dynamic values."
-  type        = map(list(string))
+  type        = (string)
   default     = {}
 }
 
