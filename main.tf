@@ -136,6 +136,11 @@ resource "google_project_iam_binding" "authoritative" {
   project  = local.project.project_id
   role     = each.key
   members  = each.value
+  condition {
+    title       = "expires_after_${local.expression}"
+    description = "Expiring at midnight of ${local.expression}"
+    expression  = local.expression
+  }
   depends_on = [
     google_project_service.project_services,
     google_project_iam_custom_role.roles
