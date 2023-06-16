@@ -35,7 +35,7 @@ variable "custom_roles" {
 variable "expression" {
   description = "Sets time limit on access. e.g. request.time < timestamp(\"2020-01-01T00:00:00Z\")."
   type        = string
-  default     = {}
+  default     = null
 }
 
 variable "group_iam" {
